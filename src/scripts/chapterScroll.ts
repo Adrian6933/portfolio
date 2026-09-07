@@ -1,5 +1,5 @@
 /** Wheel distance needed before changing chapters; internal scenes stay continuous. */
-export const CHAPTER_THRESHOLD = 240;
+export const CHAPTER_THRESHOLD = 180;
 export function nextStop(stops: number[], y: number, direction: number) {
   return direction > 0 ? stops.find(stop => stop > y + 2) ?? stops.at(-1) ?? 0
     : [...stops].reverse().find(stop => stop < y - 2) ?? stops[0] ?? 0;
@@ -35,6 +35,16 @@ export function setupChapterScroll() {
     for (const section of sections()) {
       const edge = internalBoundary(section.top, section.end, scrollY, direction);
       if (edge !== null) return edge;
+    }
+    return null;
+  }
+  function sceneBoundary(direction: number) {
+    const tolerance = 5;
+    for (const section of sections()) {
+      if (direction > 0 && scrollY >= section.end - tolerance && scrollY <= section.end + tolerance)
+        return section.end;
+      if (direction < 0 && scrollY >= section.top - tolerance && scrollY <= section.top + tolerance)
+        return section.top;
     }
     return null;
   }
@@ -76,6 +86,16 @@ export function setupChapterScroll() {
     lockedUntil = 0;
     const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1);
     const edge = boundary(direction);
+    const finishedScene = sceneBoundary(direction);
+    if (finishedScene !== null) {
+      event.preventDefault();
+      accumulated = addWheelDistance(accumulated, delta);
+      if (Math.abs(accumulated) >= CHAPTER_THRESHOLD) {
+        accumulated = 0;
+        move(direction);
+      }
+      return;
+    }
     if (edge !== null) {
       accumulated = 0;
       // Let the browser scroll normally within a scene. Clamp only its last
