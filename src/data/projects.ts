@@ -2,11 +2,11 @@ export const projects = [
   {
     slug: 'toscamare', number: '01', name: 'Toscamare', category: 'WEB CORPORATIVA', kind: 'sea',
     headline: 'Una empresa real. Una web en producción.',
-    summary: 'Diseño, desarrollo y publicación de la web corporativa durante mis prácticas.',
+    summary: 'La presencia digital de Toscamare, distribuidora de alimentación con sede en Huelva.',
     tags: ['Frontend', 'Diseño', 'Despliegue'],
-    context: 'La presencia digital de una empresa de venta y distribución de alimentos.',
+    context: 'Toscamare vende y distribuye alimentación desde Huelva, con servicio para hostelería y una red de 20 tiendas.',
     contribution: 'Desarrollé la web corporativa y me encargué del recorrido completo, desde el diseño hasta su puesta en producción.',
-    result: 'Un sitio público donde conocer la empresa y su actividad.',
+    result: 'Un sitio público para presentar su actividad, productos, tiendas y vías de contacto.',
     learning: 'Conectar el diseño y la implementación con la parte menos visible: hosting, dominio y publicación.',
     link: 'https://toscamare.es', linkLabel: 'Visitar Toscamare',
     note: 'Proyecto realizado durante las prácticas del ciclo de DAW en 2026.'
