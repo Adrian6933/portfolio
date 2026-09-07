@@ -1,0 +1,22 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; }
+const { title = 'Adrián González Chico — Desarrollador Full Stack', description = 'Desarrollo aplicaciones web de principio a fin: frontend, backend, bases de datos y despliegue. Portfolio de Adrián González Chico, Madrid.' } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f1f0eb" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body><a class="skip-link" href="#main">Saltar al contenido</a><slot /></body>
+</html>
+

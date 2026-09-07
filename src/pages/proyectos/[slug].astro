@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectVisual from '../../components/ProjectVisual.astro';
+import { projects } from '../../data/projects';
+export function getStaticPaths() { return projects.map(project => ({ params: { slug: project.slug }, props: { project } })); }
+const { project } = Astro.props;
+const next = projects[(projects.findIndex(p => p.slug === project.slug) + 1) % projects.length];
+---
+<Layout title={project.name + ' — Adrián González Chico'} description={project.summary}>
+  <header class="case-header"><a class="wordmark" href="/" aria-label="Volver al inicio">ag<span>/</span></a><a href="/#proyectos">← Todos los proyectos</a><a href="mailto:adriangonzalezchico@gmail.com">Hablemos ↗</a></header>
+  <main id="main" class="case-main">
+    <p class="eyebrow">{project.number} / {project.category}</p>
+    <h1>{project.name}</h1><p class="case-headline">{project.headline}</p>
+    <div class="case-tags">{project.tags.map(tag => <span>{tag}</span>)}</div>
+    <ProjectVisual kind={project.kind} />
+    <p class="case-note">{project.note}</p>
+    <div class="case-story">{[{n:'01', title:'El contexto', text:project.context}, {n:'02', title:'Mi aportación', text:project.contribution}, {n:'03', title:'El resultado', text:project.result}, {n:'04', title:'Lo que me llevo', text:project.learning}].map(block => <section><span class="eyebrow">{block.n}</span><h2>{block.title}</h2><p>{block.text}</p></section>)}</div>
+    {project.link && <a class="solid-link" href={project.link} target="_blank" rel="noopener noreferrer">{project.linkLabel} ↗</a>}
+    <a class="next-project" href={'/proyectos/' + next.slug + '/'}><span class="eyebrow">SIGUIENTE PROYECTO</span><strong>{next.name} <span>→</span></strong></a>
+  </main>
+  <footer class="site-footer"><span>ADRIÁN GONZÁLEZ CHICO</span><a href="/#contacto">¿HABLAMOS? ↗</a></footer>
+</Layout>
+

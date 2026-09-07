@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
+import StackScene from '../components/StackScene';
+import ToolMarquee from '../components/ToolMarquee';
+import { projects } from '../data/projects';
+const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'}, {id:'fullstack', label:'Full stack'}, {id:'herramientas', label:'Stack'}, {id:'laboratorio', label:'Laboratorio'}, {id:'contacto', label:'Contacto'}];
+---
+<Layout>
+  <header class="site-header">
+    <a class="wordmark" href="#inicio" aria-label="Adrián González Chico, inicio">ag<span>/</span></a>
+    <span class="header-name">ADRIÁN GONZÁLEZ CHICO<br /><span>DESARROLLADOR FULL STACK</span></span>
+    <nav aria-label="Navegación principal"><a href="#proyectos">Proyectos</a><a class="header-contact" href="#contacto">Hablemos <span>↗</span></a></nav>
+  </header>
+  <nav class="section-nav" aria-label="Secciones del portfolio">{nav.map((item, i) => <a href={'#' + item.id} data-section={item.id} aria-label={item.label} class:list={[i === 0 && 'is-active']} aria-current={i === 0 ? 'location' : undefined}><span class="section-nav-label">{String(i + 1).padStart(2, '0')} / {item.label}</span><span class="section-nav-bar"></span></a>)}</nav>
+  <main id="main">
+    <section class="hero chapter" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow"><span class="status-dot"></span> MADRID, ES · ABIERTO A OPORTUNIDADES</p>
+        <h1 id="hero-title">FULL<br /><span>STACK<span class="hero-asterisk">✳</span></span></h1>
+        <div class="hero-bottom"><p>De la interfaz<br />a lo que hace que<br /><strong>todo funcione.</strong></p><a class="round-link" href="#proyectos" aria-label="Explorar mis proyectos"><span>↘</span></a></div>
+      </div>
+      <div class="hero-portrait">
+        <div class="portrait-frame"><img src="/images/adrian.webp" alt="Adrián González Chico, desarrollador full stack" width="1000" height="1334" fetchpriority="high" /></div>
+        <span class="portrait-stamp">CÓDIGO CON VISIÓN COMPLETA</span>
+        <div class="portrait-caption"><span>ADRIÁN<br />GONZÁLEZ CHICO</span><span>DESARROLLO WEB<br />& AUTOMATIZACIÓN ↗</span></div>
+      </div>
+      <div class="hero-footer"><span>FRONTEND · BACKEND · DATOS · DESPLIEGUE</span><a href="#proyectos">DESLIZA PARA EXPLORAR <span>↓</span></a><span>PORTFOLIO / 2026</span></div>
+    </section>
+
+    <section id="proyectos" class="projects-section chapter" aria-labelledby="projects-title">
+      <div class="projects-sticky">
+        <div class="section-heading"><div><p class="eyebrow">02 / TRABAJO SELECCIONADO</p><h2 id="projects-title">Ideas que<br /><em>ya toman forma.</em></h2></div><div class="projects-heading-aside"><p>De una necesidad concreta<br />a una solución que se puede usar.</p><span class="project-counter">01 — 03 <span>→</span></span></div></div>
+        <div class="projects-viewport"><div class="projects-track">{projects.map(project => <article class="project-card">
+          <a href={'/proyectos/' + project.slug + '/'} class="project-image-link" aria-label={'Ver el proyecto ' + project.name}><ProjectVisual kind={project.kind} /><span class="project-open">↗</span></a>
+          <div class="project-meta"><div><span class="eyebrow">{project.number} / {project.category}</span><h3><a href={'/proyectos/' + project.slug + '/'}>{project.name}</a></h3><p>{project.summary}</p></div><div class="project-tags">{project.tags.map(tag => <span>{tag}</span>)}</div></div>
+        </article>)}</div></div>
+      </div>
+    </section>
+
+    <section id="fullstack" class="fullstack-section chapter" aria-label="Mi enfoque full stack"><div class="fullstack-sticky"><StackScene client:load /></div></section>
+
+    <section id="herramientas" class="tools-section chapter" aria-labelledby="tools-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / MI CAJA DE HERRAMIENTAS</p><h2 id="tools-title">Curiosidad constante.<br /><em>Más formas de crear.</em></h2></div><p class="section-aside">Tecnologías con las que he trabajado<br />en proyectos y formación.</p></div>
+      <ToolMarquee client:visible />
+      <div class="tools-details">
+        <div><span class="eyebrow">INFRAESTRUCTURA & CLOUD</span><p>Linux · Docker · Kubernetes · Git · GitHub Actions · Cloudflare · Vercel · Netlify · Railway · Hostinger · Google Cloud · Oracle Cloud · SSH</p></div>
+        <div><span class="eyebrow">AUTOMATIZACIÓN & DATOS</span><p>Python · Bash · Pandas · NumPy · Polars · Matplotlib · Seaborn · Streamlit · Pentaho PDI · ETL / ELT</p></div>
+        <div><span class="eyebrow">OTRAS PIEZAS DEL STACK</span><p>PHP · Tomcat · JDBC · DBeaver · Chrome API · Manifest V3 · PuTTY · FileZilla</p></div>
+      </div>
+      <div class="ai-note"><span>IA EN MI FLUJO DE TRABAJO ↗</span><p>Claude · Cursor · Codex · OpenCode · Kiro · Antigravity</p><small>Para prototipar y revisar código.</small></div>
+    </section>
+
+    <section id="laboratorio" class="lab-section chapter" aria-labelledby="lab-title">
+      <div class="lab-heading"><p class="eyebrow">05 / MENOS REPETIR. MÁS CONSTRUIR.</p><h2 id="lab-title">Si se repite,<br /><em>lo automatizo.</em></h2><p>Scripts, extensiones y procesos de datos.<br />Pequeñas herramientas para resolver tareas reales.</p></div>
+      <div class="pipeline" aria-label="ETL: origen, capa bronce, capa plata y capa oro">
+        <div class="pipeline-line"></div>
+        <div class="pipeline-node"><span class="node-symbol">▤</span><small>01 / ORIGEN</small><h3>Datos de entrada</h3><p>El punto de partida.</p></div>
+        <div class="pipeline-node"><span class="node-symbol">▦</span><small>02 / BRONCE</small><h3>Recoger</h3><p>Conservar los datos originales.</p></div>
+        <div class="pipeline-node"><span class="node-symbol">⌘</span><small>03 / PLATA</small><h3>Transformar</h3><p>Limpiar y estructurar.</p></div>
+        <div class="pipeline-node"><span class="node-symbol">✳</span><small>04 / ORO</small><h3>Dar sentido</h3><p>Dimensiones y hechos.</p></div>
+      </div>
+      <div class="lab-bottom"><p>ETL desarrollado con <strong>Pentaho PDI</strong> durante mi formación en STEMDO: de capas bronce, plata y oro a un modelo en estrella.</p><div><span>PYTHON / SCRIPTS</span><p>Procesado de archivos y tareas del día a día.</p></div><div><span>CHROME / EXTENSIONES</span><p>Funciones propias, interfaz inyectada y ajustes persistentes.</p></div></div>
+    </section>
+
+    <section id="contacto" class="contact-section chapter" aria-labelledby="contact-title">
+      <div class="contact-background"><img src="/images/adrian.webp" alt="" loading="lazy" width="1000" height="1334" /></div>
+      <div class="contact-content">
+        <p class="eyebrow">06 / EL SIGUIENTE CAPÍTULO</p>
+        <div class="journey"><div><span>2024 — 2026</span><p>Desarrollo de Aplicaciones Web<br /><small>IES Ribera del Tajo</small></p></div><div><span>2026</span><p>Prácticas · DevOps & Data<br /><small>STEMDO</small></p></div><div><span>DESDE 2024</span><p>Proyectos propios<br /><small>Desarrollo y automatización</small></p></div></div>
+        <h2 id="contact-title">¿Y si hacemos<br /><em>algo juntos?</em><span>↗</span></h2>
+        <p class="contact-intro">Busco mi próxima oportunidad como desarrollador full stack.<br />Me interesa lo que puedo construir. Y todo lo que me queda por aprender.</p>
+        <div class="contact-actions"><a class="email-link" href="mailto:adriangonzalezchico@gmail.com">adriangonzalezchico@gmail.com <span>↗</span></a><button id="copy-email" type="button" aria-label="Copiar dirección de email">Copiar email <span>⧉</span></button></div>
+        <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+        <div class="contact-footer"><a href="https://github.com/Adrian6933" target="_blank" rel="noopener noreferrer">GitHub ↗</a><span>MADRID · ESPAÑOL / INGLÉS B1</span><a href="#inicio">VOLVER ARRIBA ↑</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>© {new Date().getFullYear()} ADRIÁN GONZÁLEZ CHICO</span><span>HECHO CON ASTRO, REACT & CURIOSIDAD.</span></footer>
+</Layout>
+<script>
+  const chapters = [...document.querySelectorAll<HTMLElement>('.chapter')];
+  const projects = document.querySelector<HTMLElement>('.projects-section');
+  const track = document.querySelector<HTMLElement>('.projects-track');
+  const viewport = document.querySelector<HTMLElement>('.projects-viewport');
+  const counter = document.querySelector<HTMLElement>('.project-counter');
+  const lab = document.querySelector<HTMLElement>('.lab-section');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let scheduled = false;
+  function renderScroll() {
+    scheduled = false;
+    const height = window.innerHeight;
+    const current = chapters.find(section => { const rect = section.getBoundingClientRect(); return rect.top <= height * .45 && rect.bottom > height * .45; });
+    document.querySelectorAll<HTMLAnchorElement>('.section-nav a').forEach(link => {
+      const active = link.dataset.section === current?.id;
+      link.classList.toggle('is-active', active);
+      if (active) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
+    });
+    document.body.classList.toggle('on-dark', current?.id === 'fullstack' || current?.id === 'contacto');
+    if (projects && track && viewport) {
+      if (window.innerWidth >= 900 && height > 520 && !reduce.matches) {
+        projects.classList.add('scroll-enhanced');
+        const max = Math.max(0, track.scrollWidth - viewport.clientWidth);
+        const p = Math.max(0, Math.min(1, -projects.getBoundingClientRect().top / Math.max(1, projects.offsetHeight - height)));
+        track.style.transform = 'translate3d(' + (-max * p) + 'px,0,0)';
+        if (counter) counter.innerHTML = '0' + (Math.min(2, Math.floor(p * 3)) + 1) + ' — 03 <span>→</span>';
+      } else { projects.classList.remove('scroll-enhanced'); track.style.transform = ''; }
+    }
+    if (lab) {
+      const p = Math.max(0, Math.min(1, (height * .8 - lab.getBoundingClientRect().top) / (height * .65)));
+      lab.style.setProperty('--pipeline-progress', String(reduce.matches ? 1 : p));
+      lab.querySelectorAll<HTMLElement>('.pipeline-node').forEach((node, i) => node.classList.toggle('is-lit', reduce.matches || p >= i / 4));
+    }
+  }
+  function scheduleScroll() { if (!scheduled) { scheduled = true; requestAnimationFrame(renderScroll); } }
+  window.addEventListener('scroll', scheduleScroll, { passive: true });
+  window.addEventListener('resize', scheduleScroll);
+  reduce.addEventListener('change', scheduleScroll);
+  renderScroll();
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(link => link.addEventListener('click', () => {
+    const target = document.querySelector<HTMLElement>(link.hash);
+    if (target) { target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
+  }));
+  // Horizontal storytelling remains keyboard accessible: reveal the focused project.
+  track?.addEventListener('focusin', event => {
+    if (!projects?.classList.contains('scroll-enhanced') || !viewport) return;
+    const target = (event.target as HTMLElement).closest<HTMLElement>('.project-card');
+    if (!target || !track) return;
+    const max = track.scrollWidth - viewport.clientWidth;
+    const p = max > 0 ? Math.min(1, target.offsetLeft / max) : 0;
+    window.scrollTo({ top: projects.offsetTop + p * (projects.offsetHeight - window.innerHeight), behavior: 'instant' });
+  });
+  const portrait = document.querySelector<HTMLElement>('.hero-portrait');
+  portrait?.addEventListener('pointermove', e => {
+    if (reduce.matches || e.pointerType !== 'mouse') return;
+    const r = portrait.getBoundingClientRect();
+    portrait.style.setProperty('--rx', ((e.clientY - r.top) / r.height - .5) * -5 + 'deg');
+    portrait.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 5 + 'deg');
+  });
+  portrait?.addEventListener('pointerleave', () => { portrait.style.setProperty('--rx', '0deg'); portrait.style.setProperty('--ry', '0deg'); });
+  document.getElementById('copy-email')?.addEventListener('click', async () => {
+    const status = document.getElementById('copy-status');
+    try { await navigator.clipboard.writeText('adriangonzalezchico@gmail.com'); if (status) status.textContent = 'Email copiado. ¡Hablamos pronto!'; }
+    catch { if (status) status.textContent = 'Puedes seleccionar y copiar el email, o pulsarlo para escribirme.'; }
+  });
+</script>
+
+

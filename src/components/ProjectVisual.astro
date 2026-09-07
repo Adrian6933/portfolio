@@ -1,0 +1,28 @@
+---
+interface Props { kind: string; }
+const { kind } = Astro.props;
+---
+<div class:list={['project-visual', kind]} aria-hidden="true">
+  {kind === 'sea' && <div class="sea-composition">
+    <div class="visual-topline"><b>toscamare<span>®</span></b><span>HUELVA · ALIMENTACIÓN</span></div>
+    <div class="sea-title">Origen.<br />Calidad.<br /><i>Confianza.</i></div>
+    <div class="sea-bottom"><span>DEL DISEÑO<br />A PRODUCCIÓN</span><span class="circle-arrow">↗</span></div>
+    <div class="sea-lines"></div>
+  </div>}
+  {kind === 'logistics' && <div class="dashboard-composition">
+    <aside><b>lg<span>↗</span></b><span class="dash-icon active">▦</span><span class="dash-icon">▤</span><span class="dash-icon">◷</span></aside>
+    <div class="dashboard-main">
+      <div class="dashboard-top"><span>Vista general</span><span class="demo-avatar">AG</span></div>
+      <div class="dashboard-heading"><div><small>OPERATIVA DIARIA</small><h3>Todo en su sitio.</h3></div><span class="demo-pill">+ Nueva entrada</span></div>
+      <div class="dashboard-stats"><div><small>Entradas</small><strong>24<span>↗</span></strong></div><div><small>En reparto</small><strong>08<span>→</span></strong></div><div><small>Completados</small><strong>16<span>✓</span></strong></div></div>
+      <div class="dashboard-table"><div><b>Últimos movimientos</b><span>Hoy ↓</span></div>{['Entrada de mercancía', 'Preparación de reparto', 'Registro de albarán'].map((label, i) => <div><span class="table-square">{i + 1}</span><span>{label}<small>Registro de ejemplo</small></span><span class="table-state">{i === 1 ? 'En curso' : 'Registrado'}</span></div>)}</div>
+    </div>
+  </div>}
+  {kind === 'fitness' && <div class="fitness-composition">
+    <div class="fitness-word">FIT<br />PULSE<span>®</span></div>
+    <div class="fitness-phone"><div class="phone-island"></div><div class="phone-top">FitPulse <span>↗</span></div><small>TU PRÓXIMO PASO</small><h3>Más fuerte.<br />Cada día.</h3><div class="workout"><span>ENTRENAMIENTO</span><b>Tren superior</b><small>6 ejercicios · Rutina de ejemplo</small><div>Empezar sesión <span>→</span></div></div><div class="phone-chart"><span>Tu progreso</span><div>{[30, 46, 38, 60, 53, 77, 91].map(n => <i style={'height:' + n + '%'}></i>)}</div></div><div class="phone-nav"><span>⌂</span><span>▥</span><span>◉</span></div></div>
+    <span class="fitness-note">CONSTANCIA.<br />DATOS.<br />PROGRESO.</span>
+  </div>}
+  <span class="concept-label">VISTA CONCEPTUAL{kind === 'logistics' ? ' · DATOS FICTICIOS' : ''}</span>
+</div>
+
