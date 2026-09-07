@@ -79,6 +79,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
   <footer class="site-footer"><span>© {new Date().getFullYear()} ADRIÁN GONZÁLEZ CHICO</span><span>HECHO CON ASTRO, REACT & CURIOSIDAD.</span></footer>
 </Layout>
 <script>
+  import { setupChapterScroll } from '../scripts/chapterScroll';
   const chapters = [...document.querySelectorAll<HTMLElement>('.chapter')];
   const projects = document.querySelector<HTMLElement>('.projects-section');
   const track = document.querySelector<HTMLElement>('.projects-track');
@@ -117,6 +118,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
   window.addEventListener('resize', scheduleScroll);
   reduce.addEventListener('change', scheduleScroll);
   renderScroll();
+  setupChapterScroll();
   document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(link => link.addEventListener('click', () => {
     const target = document.querySelector<HTMLElement>(link.hash);
     if (target) { target.setAttribute('tabindex', '-1'); target.focus({ preventScroll: true }); }
@@ -144,5 +146,6 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
     catch { if (status) status.textContent = 'Puedes seleccionar y copiar el email, o pulsarlo para escribirme.'; }
   });
 </script>
+
 
 
