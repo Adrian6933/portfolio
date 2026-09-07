@@ -91,6 +91,48 @@
   .marquee-window{mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 }
 
+/* Interaction polish: make every real action feel actionable. */
+.site-header a,.section-nav a,.round-link,.project-image-link,.project-meta h3 a,
+.header-contact,.email-link,.contact-actions button,.contact-footer a,.solid-link,
+.next-project,.case-header a,.wordmark{cursor:pointer}
+.site-header a,.case-header a,.contact-footer a{transition:color .22s ease,opacity .22s ease}
+.site-header a:hover,.case-header a:hover,.contact-footer a:hover{color:var(--blue)}
+.section-nav a{transition:transform .22s ease}
+.section-nav a:hover{transform:translateX(-4px)}
+.section-nav a:active,.round-link:active,.solid-link:active,.contact-actions button:active{transform:scale(.96)}
+.project-card{transition:transform .35s var(--ease)}
+.project-image-link{transition:box-shadow .35s var(--ease)}
+.project-image-link::after{content:"";position:absolute;inset:0;border:1px solid transparent;border-radius:inherit;transition:border-color .3s ease,box-shadow .3s ease;pointer-events:none}
+.project-card:hover{transform:translateY(-8px)}
+.project-card:hover .project-image-link{box-shadow:0 20px 45px #182b421c}
+.project-card:hover .project-image-link::after{border-color:#254bff80;box-shadow:inset 0 0 0 2px #f1f0eb80}
+.project-card:hover .project-visual{filter:saturate(1.08)}
+.project-visual{transition:filter .35s ease}
+.project-open{cursor:pointer}
+.layer-tabs button,.marquee-controls button{cursor:pointer}
+.layer-tabs button:hover{color:#d8e3ff;border-color:#d8e3ff}
+.marquee-controls button:hover{background:#254bff0d;border-radius:20px}
+.journey>div{transition:border-color .25s ease,transform .25s ease}
+.journey>div:hover{border-color:#a7bbef;transform:translateX(4px)}
+.pipeline-node{transition:transform .28s ease}
+.pipeline-node:hover{transform:translateY(-4px)}
+.pipeline-node:hover .node-symbol{border-color:var(--blue);color:var(--blue)}
+.ai-note{transition:border-color .25s ease}
+.ai-note:hover{border-color:#9eb0ed}
+.contact-actions button{transition:background .22s ease,color .22s ease,border-color .22s ease,transform .22s ease}
+.contact-actions button:hover{border-color:#a7bbef;color:#dce5ff}
+.email-link,.solid-link,.next-project{transition:color .22s ease,background .22s ease,transform .22s ease}
+.email-link:hover{transform:translateX(4px)}
+.solid-link:hover{transform:translateY(-3px);box-shadow:0 12px 28px #254bff35}
+.next-project:hover{transform:translateX(6px)}
+.next-project:hover>strong span{display:inline-block;transform:translateX(7px)}
+.next-project>strong span{transition:transform .22s ease}
+.case-tags span{transition:background .22s ease,color .22s ease,border-color .22s ease}
+.case-tags span:hover{background:var(--blue);border-color:var(--blue);color:white}
+@media(prefers-reduced-motion:reduce){
+  .project-card:hover,.journey>div:hover,.pipeline-node:hover,.email-link:hover,.solid-link:hover,.next-project:hover{transform:none}
+}
+
 
 
 /* The ETL stays on screen while native scrolling advances its phases. */
