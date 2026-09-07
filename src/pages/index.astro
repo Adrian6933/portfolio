@@ -52,7 +52,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
     </section>
 
     <section id="laboratorio" class="lab-section chapter" aria-labelledby="lab-title">
-      <div class="lab-heading"><p class="eyebrow">05 / MENOS REPETIR. MÁS CONSTRUIR.</p><h2 id="lab-title">Si se repite,<br /><em>lo automatizo.</em></h2><p>Scripts, extensiones y procesos de datos.<br />Pequeñas herramientas para resolver tareas reales.</p></div>
+      <div class="lab-sticky"><div class="lab-heading"><p class="eyebrow">05 / MENOS REPETIR. MÁS CONSTRUIR.</p><h2 id="lab-title">Si se repite,<br /><em>lo automatizo.</em></h2><p>Scripts, extensiones y procesos de datos.<br />Pequeñas herramientas para resolver tareas reales.</p></div>
       <div class="pipeline" aria-label="ETL: origen, capa bronce, capa plata y capa oro">
         <div class="pipeline-line"></div>
         <div class="pipeline-node"><span class="node-symbol">▤</span><small>01 / ORIGEN</small><h3>Datos de entrada</h3><p>El punto de partida.</p></div>
@@ -61,7 +61,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
         <div class="pipeline-node"><span class="node-symbol">✳</span><small>04 / ORO</small><h3>Dar sentido</h3><p>Dimensiones y hechos.</p></div>
       </div>
       <div class="lab-bottom"><p>ETL desarrollado con <strong>Pentaho PDI</strong> durante mi formación en STEMDO: de capas bronce, plata y oro a un modelo en estrella.</p><div><span>PYTHON / SCRIPTS</span><p>Procesado de archivos y tareas del día a día.</p></div><div><span>CHROME / EXTENSIONES</span><p>Funciones propias, interfaz inyectada y ajustes persistentes.</p></div></div>
-    </section>
+    </div></section>
 
     <section id="contacto" class="contact-section chapter" aria-labelledby="contact-title">
       <div class="contact-background"><img src="/images/adrian.webp" alt="" loading="lazy" width="1000" height="1334" /></div>
@@ -79,7 +79,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
   <footer class="site-footer"><span>© {new Date().getFullYear()} ADRIÁN GONZÁLEZ CHICO</span><span>HECHO CON ASTRO, REACT & CURIOSIDAD.</span></footer>
 </Layout>
 <script>
-  import { setupChapterScroll } from '../scripts/chapterScroll';
+  import { setupChapterScroll, pipelineProgress } from '../scripts/chapterScroll';
   const chapters = [...document.querySelectorAll<HTMLElement>('.chapter')];
   const projects = document.querySelector<HTMLElement>('.projects-section');
   const track = document.querySelector<HTMLElement>('.projects-track');
@@ -108,9 +108,12 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
       } else { projects.classList.remove('scroll-enhanced'); track.style.transform = ''; }
     }
     if (lab) {
-      const p = Math.max(0, Math.min(1, (height * .8 - lab.getBoundingClientRect().top) / (height * .65)));
+      const pinned = window.innerWidth >= 900 && height > 520 && !reduce.matches;
+      const p = pinned
+        ? pipelineProgress(lab.getBoundingClientRect().top, lab.offsetHeight - height)
+        : pipelineProgress(lab.getBoundingClientRect().top, Math.max(height * .65, lab.offsetHeight - height));
       lab.style.setProperty('--pipeline-progress', String(reduce.matches ? 1 : p));
-      lab.querySelectorAll<HTMLElement>('.pipeline-node').forEach((node, i) => node.classList.toggle('is-lit', reduce.matches || p >= i / 4));
+      lab.querySelectorAll<HTMLElement>('.pipeline-node').forEach((node, i) => node.classList.toggle('is-lit', reduce.matches || p >= i / 3));
     }
   }
   function scheduleScroll() { if (!scheduled) { scheduled = true; requestAnimationFrame(renderScroll); } }
@@ -146,6 +149,7 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
     catch { if (status) status.textContent = 'Puedes seleccionar y copiar el email, o pulsarlo para escribirme.'; }
   });
 </script>
+
 
 
 
