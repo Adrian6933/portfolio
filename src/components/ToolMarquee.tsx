@@ -22,7 +22,7 @@ export default function ToolMarquee() {
     <div className="marquee-controls"><span>UN STACK, MUCHAS POSIBILIDADES</span><button type="button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? '▶ Reanudar' : 'Ⅱ Pausar movimiento'}</button></div>
     {groups.map((group, i) => <div className={'tool-row row-' + i} key={group.label}>
       <p className="row-label">{group.label}</p><div className="marquee-window"><div className="marquee-track">
-      {[false, true].map(clone => <div className="marquee-group" key={String(clone)} aria-hidden={clone || undefined}>{group.items.map(name => {
+      {[0, 1, 2].map(clone => <div className="marquee-group" key={clone} aria-hidden={clone > 0 || undefined}>{group.items.map(name => {
         const icon = iconByName[name];
         return <span className="tech-item" key={name}>
           <span className="tech-symbol" style={icon ? { color: '#' + icon.hex } : undefined} aria-hidden="true">
