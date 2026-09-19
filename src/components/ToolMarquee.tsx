@@ -18,9 +18,10 @@ const groups = [
 ];
 export default function ToolMarquee() {
   const [paused, setPaused] = useState(false);
+  const [slowRow, setSlowRow] = useState<number | null>(null);
   return <div className={'tool-marquees' + (paused ? ' is-paused' : '')}>
     <div className="marquee-controls"><span>UN STACK, MUCHAS POSIBILIDADES</span><button type="button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? '▶ Reanudar' : 'Ⅱ Pausar movimiento'}</button></div>
-    {groups.map((group, i) => <div className={'tool-row row-' + i} key={group.label}>
+    {groups.map((group, i) => <div className={'tool-row row-' + i + (slowRow === i ? ' is-slowed' : '')} key={group.label} onMouseEnter={() => setSlowRow(i)} onMouseLeave={() => setSlowRow(null)}>
       <p className="row-label">{group.label}</p><div className="marquee-window"><div className="marquee-track">
       {[0, 1, 2].map(clone => <div className="marquee-group" key={clone} aria-hidden={clone > 0 || undefined}>{group.items.map(name => {
         const icon = iconByName[name];
