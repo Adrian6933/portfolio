@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   siReact, siAstro, siTypescript, siTailwindcss, siJavascript, siHtml5,
   siBootstrap, siShopify, siNodedotjs, siLaravel, siPython, siSupabase,
@@ -18,11 +18,34 @@ const groups = [
 ];
 export default function ToolMarquee() {
   const [paused, setPaused] = useState(false);
-  const [slowRow, setSlowRow] = useState<number | null>(null);
+  const tracks = useRef<Array<HTMLDivElement | null>>([]);
+  const playbackRates = useRef([1, 1]);
+  const animationFrame = useRef<number | null>(null);
+
+  const setRowSpeed = (index: number, targetRate: number) => {
+    const animation = tracks.current[index]?.getAnimations()[0];
+    if (!animation) return;
+    if (animationFrame.current !== null) cancelAnimationFrame(animationFrame.current);
+
+    const initialRate = playbackRates.current[index] ?? 1;
+    const startedAt = performance.now();
+    const duration = 320;
+    const tick = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const rate = initialRate + (targetRate - initialRate) * eased;
+      animation.playbackRate = rate;
+      playbackRates.current[index] = rate;
+      if (progress < 1) animationFrame.current = requestAnimationFrame(tick);
+      else animationFrame.current = null;
+    };
+    animationFrame.current = requestAnimationFrame(tick);
+  };
+
   return <div className={'tool-marquees' + (paused ? ' is-paused' : '')}>
     <div className="marquee-controls"><span>UN STACK, MUCHAS POSIBILIDADES</span><button type="button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? '▶ Reanudar' : 'Ⅱ Pausar movimiento'}</button></div>
-    {groups.map((group, i) => <div className={'tool-row row-' + i + (slowRow === i ? ' is-slowed' : '')} key={group.label} onMouseEnter={() => setSlowRow(i)} onMouseLeave={() => setSlowRow(null)}>
-      <p className="row-label">{group.label}</p><div className="marquee-window"><div className="marquee-track">
+    {groups.map((group, i) => <div className={'tool-row row-' + i} key={group.label} onMouseEnter={() => setRowSpeed(i, 0.38)} onMouseLeave={() => setRowSpeed(i, 1)}>
+      <p className="row-label">{group.label}</p><div className="marquee-window"><div className="marquee-track" ref={element => { tracks.current[i] = element; }}>
       {[0, 1, 2].map(clone => <div className="marquee-group" key={clone} aria-hidden={clone > 0 || undefined}>{group.items.map(name => {
         const icon = iconByName[name];
         return <span className="tech-item" key={name}>
