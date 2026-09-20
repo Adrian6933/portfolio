@@ -14,11 +14,16 @@ const nav = [{id:'inicio', label:'Inicio'}, {id:'proyectos', label:'Proyectos'},
   </header>
   <nav class="section-nav" aria-label="Secciones del portfolio">{nav.map((item, i) => <a href={'#' + item.id} data-section={item.id} aria-label={item.label} class:list={[i === 0 && 'is-active']} aria-current={i === 0 ? 'location' : undefined}><span class="section-nav-label">{String(i + 1).padStart(2, '0')} / {item.label}</span><span class="section-nav-bar"></span></a>)}</nav>
   <main id="main">
-    <section class="hero no-portrait chapter" id="inicio" aria-labelledby="hero-title">
+    <section class="hero chapter" id="inicio" aria-labelledby="hero-title">
       <div class="hero-content">
         <p class="eyebrow"><span class="status-dot"></span> MADRID, ES · ABIERTO A OPORTUNIDADES</p>
         <h1 id="hero-title">FULL<br /><span>STACK<span class="hero-asterisk">✳</span></span></h1>
         <div class="hero-bottom"><p>De la interfaz<br />a lo que hace que<br /><strong>todo funcione.</strong></p><a class="round-link" href="#proyectos" aria-label="Explorar mis proyectos"><span>↘</span></a></div>
+      </div>
+      <div class="hero-portrait">
+        <div class="portrait-frame"><img src="/images/adrian.webp" alt="Adrián González Chico, desarrollador full stack" width="1000" height="1334" fetchpriority="high" /></div>
+        <span class="portrait-stamp">CÓDIGO CON VISIÓN COMPLETA</span>
+        <div class="portrait-caption"><span>ADRIÁN<br />GONZÁLEZ CHICO</span><span>DESARROLLO WEB<br />& AUTOMATIZACIÓN ↗</span></div>
       </div>
       <div class="hero-footer"><span>FRONTEND · BACKEND · DATOS · DESPLIEGUE</span><a href="#proyectos">DESLIZA PARA EXPLORAR <span>↓</span></a><span>PORTFOLIO / 2026</span></div>
     </section>

@@ -94,8 +94,6 @@
 .row-1:hover .marquee-track{animation-duration:145s}
 .tool-row.is-slowed .marquee-track{animation-duration:140s!important}
 .tool-row.row-1.is-slowed .marquee-track{animation-duration:165s!important}
-.hero.no-portrait{grid-template-columns:minmax(0,1fr)}
-.hero.no-portrait .hero-content{max-width:920px}
 .tech-item{position:relative;transition:transform .25s var(--ease),color .25s var(--ease),filter .25s var(--ease)}
 .tech-item:hover{z-index:2;transform:scale(1.09);color:var(--blue);filter:drop-shadow(0 8px 14px rgba(37,75,255,.15))}
 .tech-item:hover .tech-symbol{filter:drop-shadow(0 0 8px currentColor)}
