@@ -90,8 +90,8 @@
 /* The marquee changes its playback rate through React, keeping its current position. */
 .tool-marquees:hover .marquee-track{animation-play-state:running}
 .tool-marquees.is-paused .marquee-track{animation-play-state:paused}
-.tech-item{position:relative;isolation:isolate;padding:8px 10px;margin:-8px -10px;border-radius:999px;transition:transform .28s var(--ease),color .28s var(--ease),filter .28s var(--ease),background .28s var(--ease)}
-.tech-item:hover{z-index:2;transform:translateY(-3px) scale(1.035);color:var(--blue);background:#254bff0d;filter:drop-shadow(0 9px 14px rgba(37,75,255,.13))}
+.tech-item{position:relative;isolation:isolate;padding:4px 6px;margin:-4px -6px;border-radius:999px;cursor:pointer;transition:transform .28s var(--ease),color .28s var(--ease),filter .28s var(--ease),background .28s var(--ease)}
+.tech-item:hover{z-index:2;transform:translateY(-2px) scale(1.018);color:var(--blue);background:#254bff0d;filter:drop-shadow(0 7px 11px rgba(37,75,255,.13))}
 .tech-item:hover .tech-symbol{transform:rotate(-7deg) scale(1.08);filter:drop-shadow(0 0 8px currentColor)}
 .tech-symbol{transition:transform .28s var(--ease),filter .28s var(--ease)}
 
