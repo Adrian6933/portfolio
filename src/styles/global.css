@@ -160,3 +160,4 @@
   .lab-bottom>p,.lab-bottom>div>p{font-size:13px}
 }
 
+.cv-download{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #58664e;border-radius:30px;padding:10px 16px;font-size:12px;color:#c1cdb8;text-decoration:none;transition:border-color .22s ease,color .22s ease}.cv-download:hover{border-color:#a7bbef;color:#dce5ff}
